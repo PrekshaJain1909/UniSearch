@@ -1,48 +1,54 @@
-let button = document.querySelector("button");
-let orderedlist = document.querySelector("ol");
-button.addEventListener('click',async()=>{
-    try{ 
-        orderedlist.innerHTML = "";
-        let listname= await getlist();
-        for(let i=0;i<listname.length;i++){
-        let list= document.createElement("li");
-        orderedlist.appendChild(list);
-        list.innerText=listname[i].name;
-        list.classList.add("backg");
-        }
+const button = document.querySelector("#generateBtn");
+const orderedlist = document.querySelector("#orderedList");
+const input = document.querySelector("#inputt");
+const errorPara = document.querySelector("#error");
+const url = "http://universities.hipolabs.com/search?country=";
 
-    }
-    catch(e){
-        console.log("Error", e);
-    }
-});
-document.addEventListener('keypress',async()=>{
-    try{ 
-        orderedlist.innerHTML = "";
-        let listname= await getlist();
-        for(let i=0;i<listname.length;i++){
-        let list= document.createElement("li");
-        orderedlist.appendChild(list);
-        list.innerText=listname[i].name;
-        list.classList.add("backg");
-        }
+// Fetch university data
+async function getUniversities() {
+  const country = input.value.trim();
+  if (!country) {
+    errorPara.innerText = "⚠️ Please enter a country name.";
+    orderedlist.innerHTML = "";
+    return;
+  }
 
-    }
-    catch(e){
-        console.log("Error", e);
-    }
-});
-let url="http://universities.hipolabs.com/search?country=";
-async function getlist(){
-    try{
-        let inputbut = document.querySelector("input");
-        let inputval=inputbut.value;
-        let clgname=await axios.get(url+inputval);
-        return clgname.data;
-       }
-    catch(e){
-        console.log("Error ", e);
-        return "Not Found Any College";
+  try {
+    const response = await axios.get(url + country);
+    const data = response.data;
+
+    if (data.length === 0) {
+      errorPara.innerText = `❌ No universities found for "${country}"`;
+      orderedlist.innerHTML = "";
+      return;
     }
 
+    errorPara.innerText = "";
+    renderList(data);
+  } catch (e) {
+    errorPara.innerText = "🚫 Failed to fetch data. Please try again.";
+    orderedlist.innerHTML = "";
+    console.error("API error:", e);
+  }
 }
+
+// Render university list
+function renderList(universities) {
+  orderedlist.innerHTML = "";
+
+  universities.forEach((univ) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${univ.name}</strong> <br> 🌍 ${univ.country} | 🔗 <a href="${univ.web_pages[0]}" target="_blank">Visit Website</a>`;
+    orderedlist.appendChild(li);
+  });
+}
+
+// Button click
+button.addEventListener("click", getUniversities);
+
+// Press Enter
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    getUniversities();
+  }
+});
