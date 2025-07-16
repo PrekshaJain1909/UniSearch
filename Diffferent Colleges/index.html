@@ -2,26 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>University Finder</title>
-  <link rel="icon" href="univer.jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Search</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://fav.farm/🎓" />
 </head>
 <body>
   <div class="container">
-    <h1>🌍 University Finder</h1>
+    <h1>University Search</h1>
     <div class="input-area">
-      <input type="text" placeholder="Enter country name (e.g., India)" id="inputt" />
+      <input type="text" id="inputt" placeholder="Enter country name..." />
       <button id="generateBtn">Search</button>
     </div>
     <p id="error"></p>
     <ol id="orderedList"></ol>
   </div>
+  <footer>Made with ❤️</footer>
 
-  <footer>Made with 💖 by Preksha | University API</footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <!-- Axios CDN and App JS -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
