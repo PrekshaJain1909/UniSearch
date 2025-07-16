@@ -2,8 +2,7 @@ const button = document.querySelector("#generateBtn");
 const orderedlist = document.querySelector("#orderedList");
 const input = document.querySelector("#inputt");
 const errorPara = document.querySelector("#error");
-const url = "/api/universities?country="; // 🔄 Calling your proxy now
- // ✅ HTTPS
+const url = "http://universities.hipolabs.com/search?country="; // ✅ HTTPS
 
 // Fetch university data
 async function getUniversities() {
