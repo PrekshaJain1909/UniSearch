@@ -2,7 +2,7 @@ const button = document.querySelector("#generateBtn");
 const orderedlist = document.querySelector("#orderedList");
 const input = document.querySelector("#inputt");
 const errorPara = document.querySelector("#error");
-const url = "http://universities.hipolabs.com/search?country=";
+const url = "https://universities.hipolabs.com/search?country=";
 
 // Fetch university data
 async function getUniversities() {
